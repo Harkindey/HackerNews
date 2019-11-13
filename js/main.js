@@ -43,7 +43,7 @@ const getTopNews = ev => {
 /* The below is me working with an API with no CORS issues,
  I found this (https://github.com/HackerNews/API) when I was looking
 for solution to the Graphlql endpoint issue. The data returned are different,
-but it helps with display some Hacker News content
+but it helps with displaying some Hacker News content
 */
 let endPoint = 'https://hacker-news.firebaseio.com/v0';
 let options = {
@@ -93,7 +93,6 @@ const getLocation = function(href) {
 };
 
 const renderNews = items => {
-	console.log(items);
 	items.forEach((v, i) => {
 		let author = v.by,
 			comments = v.kids ? v.kids.length : 0,

@@ -100,7 +100,7 @@ body p {
 }
 
 .news__title p {
-    font-size: 15px;
+    font-size: 10pt;
 }
 
 .news__source {
@@ -194,7 +194,8 @@ a:hover {
     }
 
     .news__title p {
-        font-size: 15px;
+        font-size: 11pt;
+        line-height: 14pt;
     }
 
     .news__subtext {
