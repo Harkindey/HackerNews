@@ -105,14 +105,14 @@ const renderNews = items => {
 		newsItem.className = 'news__item flex-row';
 		//News Rank
 		const newsRank = document.createElement('div');
-		newsRank.setAttribute('id', 'newsRank');
+		newsRank.setAttribute('id', `newsRank_${i}`);
 		newsRank.innerHTML = `
     <span class="news__rank">${i + 1}.</span>
     `;
 
 		//News Vote
 		const newsVote = document.createElement('div');
-		newsVote.setAttribute('id', 'newsVote');
+		newsVote.setAttribute('id', `newsVote_${i}`);
 		newsVote.innerHTML = `
       <a href="#">
           <div class="votearrow"></div>
@@ -121,7 +121,7 @@ const renderNews = items => {
 
 		//News Content
 		const newsContent = document.createElement('div');
-		newsContent.setAttribute('id', 'newsContent');
+		newsContent.setAttribute('id', `newsContent_${i}`);
 
 		// Title
 		const newsTitle = document.createElement('div');
