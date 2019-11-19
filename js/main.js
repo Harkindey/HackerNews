@@ -23,7 +23,7 @@ const getTopNewsQuery = () =>
         }
       }`;
 
-const getTopNews = ev => {
+const getTopNews = (ev) => {
 	ev.preventDefault();
 	const options = {
 		method: 'POST',
@@ -34,15 +34,15 @@ const getTopNews = ev => {
 			query: getTopNewsQuery(),
 		}),
 	};
-	//The endpoint as a CORS (Cross-Origin Resource Sharing) problem
+	//The endpoint has a CORS (Cross-Origin Resource Sharing) problem
 	fetch(`https://www.graphqlhub.com/playground`, options)
-		.then(res => res)
-		.then(res => console.log(res));
+		.then((res) => res)
+		.then((res) => console.log(res));
 };
 
 /* The below is me working with an API with no CORS issues,
  I found this (https://github.com/HackerNews/API) when I was looking
-for solution to the Graphlql endpoint issue. The data returned are different,
+for a solution to the Graphlql endpoint issue. The data returned are different,
 but it helps with displaying some Hacker News content
 */
 let endPoint = 'https://hacker-news.firebaseio.com/v0';
@@ -77,11 +77,11 @@ function fetchItems(ids, cb) {
 	});
 }
 
-const getTopStoriesID = ev => {
+const getTopStoriesID = (ev) => {
 	ev.preventDefault();
 	fetch(`${endPoint}/topstories.json`, options)
-		.then(res => res.json())
-		.then(res => {
+		.then((res) => res.json())
+		.then((res) => {
 			fetchItems(res.splice(0, 30), renderNews);
 		});
 };
@@ -92,7 +92,7 @@ const getLocation = function(href) {
 	return l;
 };
 
-const renderNews = items => {
+const renderNews = (items) => {
 	items.forEach((v, i) => {
 		let author = v.by,
 			comments = v.kids ? v.kids.length : 0,
@@ -107,17 +107,17 @@ const renderNews = items => {
 		const newsRank = document.createElement('div');
 		newsRank.setAttribute('id', `newsRank_${i}`);
 		newsRank.innerHTML = `
-    <span class="news__rank">${i + 1}.</span>
-    `;
+				<span class="news__rank">${i + 1}.</span>
+			`;
 
 		//News Vote
 		const newsVote = document.createElement('div');
 		newsVote.setAttribute('id', `newsVote_${i}`);
 		newsVote.innerHTML = `
-      <a href="#">
-          <div class="votearrow"></div>
-      </a>
-    `;
+				<a href="#">
+					<div class="votearrow"></div>
+				</a>
+			`;
 
 		//News Content
 		const newsContent = document.createElement('div');
@@ -127,20 +127,20 @@ const renderNews = items => {
 		const newsTitle = document.createElement('div');
 		newsTitle.className = 'news__title';
 		newsTitle.innerHTML = `
-      <p>${title} <span class="news__source"> (<a href="#"><span class="news__source-site">${url}</span></a>)</span></p>
-    `;
+				<p>${title} <span class="news__source"> (<a href="#"><span class="news__source-site">${url}</span></a>)</span></p>
+			`;
 		// Subtext
 		const newsSubtext = document.createElement('div');
 		newsSubtext.className = 'news__subtext';
 		newsSubtext.innerHTML = `
-          <span class="score">${points} points</span>
-          by
-          <a href="#">${author}</a>
-          <span class="news__age">${timeago.format(time)}</span>
-          <span></span> |
-          <a href="#">hide</a> |
-          <a href="#">${comments} comments</a>
-      `;
+				<span class="score">${points} points</span>
+				by
+				<a href="#">${author}</a>
+				<span class="news__age">${timeago.format(time)}</span>
+				<span></span> |
+				<a href="#">hide</a> |
+				<a href="#">${comments} comments</a>
+			`;
 
 		newsContent.appendChild(newsTitle);
 		newsContent.appendChild(newsSubtext);
