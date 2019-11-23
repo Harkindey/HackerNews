@@ -23,7 +23,7 @@ const getTopNewsQuery = () =>
         }
       }`;
 
-const getTopNews = (ev) => {
+const getTopNews = ev => {
 	ev.preventDefault();
 	const options = {
 		method: 'POST',
@@ -36,8 +36,8 @@ const getTopNews = (ev) => {
 	};
 	//The endpoint has a CORS (Cross-Origin Resource Sharing) problem
 	fetch(`https://www.graphqlhub.com/playground`, options)
-		.then((res) => res)
-		.then((res) => console.log(res));
+		.then(res => res)
+		.then(res => console.log(res));
 };
 
 /* The below is me working with an API with no CORS issues,
@@ -77,11 +77,11 @@ function fetchItems(ids, cb) {
 	});
 }
 
-const getTopStoriesID = (ev) => {
+const getTopStoriesID = ev => {
 	ev.preventDefault();
 	fetch(`${endPoint}/topstories.json`, options)
-		.then((res) => res.json())
-		.then((res) => {
+		.then(res => res.json())
+		.then(res => {
 			fetchItems(res.splice(0, 30), renderNews);
 		});
 };
@@ -92,7 +92,7 @@ const getLocation = function(href) {
 	return l;
 };
 
-const renderNews = (items) => {
+const renderNews = items => {
 	items.forEach((v, i) => {
 		let author = v.by,
 			comments = v.kids ? v.kids.length : 0,
@@ -152,5 +152,18 @@ const renderNews = (items) => {
 		newsContainer.appendChild(newsItem);
 	});
 };
+
+// The limitation of this function was it sends only Hours ago,
+// writing a bigger function to take care of Days and maybe Months
+// might be buggy so i opted to use timeago.js which is just 2kb.
+// The popular moment.js is 16kb 🙃.
+//
+// timeago = time => {
+// 	const currentTime = new Date().getTime();
+// 	const postTime = new Date(time).getTime();
+// 	let diff = currentTime - postTime;
+// 	hours = Math.round(diff / (3600 * 1000));
+// 	return hours;
+// };
 
 document.addEventListener('DOMContentLoaded', getTopStoriesID);
